@@ -10,8 +10,12 @@ use url::Url;
 use std::time::Instant;
 use std::thread;
 use std::sync::{mpsc,Arc,Mutex};
+use lazy_static::lazy_static;
 
 
+lazy_static! {
+    static ref CLIENTS_PUBKEYS: Mutex<Vec<Vec<u8>>> = Mutex::new(Vec::new());
+}
 static BINANCE_WS_API: &str = "wss://fstream.binance.com";
 fn main() {
 
@@ -71,6 +75,9 @@ fn main() {
                 let messae:[u8;8] = _total_avg.to_be_bytes();
                 let sig = key_pair.sign(&rand,&messae).unwrap();
                 let peer_public_key_bytes = key_pair.public_key().as_ref();
+                
+                //push public key to the vector.
+                CLIENTS_PUBKEYS.lock().unwrap().push(peer_public_key_bytes.to_vec());
 
                 let message = (_total_avg,peer_public_key_bytes.to_vec(),messae.to_vec(),sig);
 
