@@ -1,4 +1,4 @@
-## Task1 - simple_client
+## simple_client
 
 #### ABOUT
 
@@ -18,7 +18,7 @@ and displays on the terminal.
   cargo run -- --simple --mode=read
 ```
 
-## Task2 - multi_client
+## multi_client
 
 #### ABOUT
 
@@ -32,7 +32,7 @@ After getting the values it computes the average again and displays it on the te
   cargo run
 ```
 
-## Task3 - sign_verification
+##sign_verification
 #### ABOUT
 In this sign_verification clients sign their average values and sends the value and signatures
 to the aggregator upon receiving the signatures the aggregator verfies the signatures.For this 
